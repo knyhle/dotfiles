@@ -18,24 +18,20 @@ Plug 'godlygeek/tabular'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'airblade/vim-gitgutter'
 Plug 'mileszs/ack.vim'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
-
-Plug 'wincent/terminus'
-
-
-Plug 'yegappan/mru'
 
 Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
+Plug 'tpope/vim-sleuth'
+
+
+Plug 'wincent/terminus'
+Plug 'yegappan/mru'
 Plug 'sheerun/vim-polyglot'
-
 Plug 'Yggdroot/indentLine'
-
 Plug 'terryma/vim-multiple-cursors'
-
 Plug 'scrooloose/nerdtree'
-
 Plug 'majutsushi/tagbar'
 
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -59,7 +55,6 @@ call plug#end()            " required
 " }}}
 " ColorScheme {{{
 
-"Credit joshdick
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 if (empty($TMUX))
   if (has("nvim"))
@@ -81,18 +76,15 @@ let g:airline#extensions#tabline#enabled = 1
 " let ayucolor="dark"   " for dark version of theme
 " colorscheme spacemacs-theme
 colorscheme dracula
-
 syntax on
-highlight Comment cterm=none gui=none
-highlight Normal cterm=none gui=none
 
 " }}}
 " Basics {{{
-" let g:TerminusFocusReporting=0
-" let g:gitgutter_terminal_reports_focus=0
-set visualbell
+let g:TerminusFocusReporting=0
+let g:gitgutter_terminal_reports_focus=0
 
 set nocompatible              " be iMproved, required
+set visualbell 
 
 filetype off                  " required
 filetype indent on
