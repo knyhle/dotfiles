@@ -1,0 +1,12 @@
+((("global-company-mode" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("after-init-hook" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("add-hook" .
+   [1 0 0 0 0 0 0 0])
+  ("setq" .
+   [3 0 0 0])
+  ("return" .
+   [0 0 0 0 0 1])
+  ("global-display-line-numbers-mode" .
+   [0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])))
