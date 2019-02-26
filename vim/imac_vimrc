@@ -1,0 +1,181 @@
+call plug#begin('~/.vim/plugged')
+
+Plug 'w0rp/ale'
+Plug 'benmills/vimux'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'tpope/vim-fugitive'
+Plug 'easymotion/vim-easymotion'
+Plug 'justinmk/vim-sneak'
+Plug 'tomtom/tcomment_vim'
+Plug 'Raimondi/delimitMate'
+Plug 'sheerun/vim-polyglot'
+Plug 'joshdick/onedark.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-surround'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'itchyny/lightline.vim'
+Plug 'christoomey/vim-tmux-navigator'
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align'
+
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+Plug 'rdnetto/YCM-Generator',  { 'branch': 'stable' }
+
+call plug#end()
+
+if has("gui_running")
+    set guifont=SF\ Mono:h12
+    autocmd GUIEnter * set vb t_vb=
+endif
+
+syntax on 
+set background=dark
+
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+if (has('termguicolors'))
+    set termguicolors
+endif
+
+colorscheme onedark
+filetype plugin indent on
+
+let g:deoplete#enable_at_startup = 1
+
+let g:lightline = { 'colorscheme': 'onedark' }
+let g:onedark_termcolors = 256
+let delimitMate_expand_cr = 1
+
+let g:sneak#label = 1
+let g:sneak#s_next = 1
+let g:Easymotion_use_smartcase = 1
+
+let g:ale_sign_column_always = 1
+let g:ycm_autoclose_preivew_window_after_insertion = 1
+
+map s <Plug>(easymotion-s2)
+map t <Plug>(easymotion-t2)
+" map / <Plug>(easymotion-sn)
+" omap / <Plug>(easymotion-tn)
+" map n <Plug>(easymotion-next)
+" map N <Plug>(easymotion-prev) 
+
+nnoremap <Leader>h :noh<CR>
+nnoremap <Leader>v :vsplit<CR>
+nnoremap <Leader>b :Bufffers<CR>
+
+
+highlight LineNr guifg=#929292
+
+set completeopt+=menuone
+set completeopt+=noselect
+set completeopt-=preview
+
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+let g:ycm_global_ycm_extra_conf = '~/Projects/.ycm_extra_conf.py'
+
+set number
+set encoding=utf8
+set splitright
+set splitbelow
+set autoindent
+set smartindent
+set wrap
+" set autochdir
+autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | silent! lcd %:p:h | endif
+
+set mouse=a
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set laststatus=2
+set wildmode=full
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+set smartcase
+set hlsearch
+set incsearch
+set lazyredraw
+" set magic
+set showmatch
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+set autoread
+
+set ruler
+
+set ignorecase
+set wrapscan
+set guioptions=r
+let mapleader=","
+
+nnoremap <leader>h :noh<enter>
+
+noremap ; :
+nnoremap : ;
+
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+
+nnoremap <C-e> $
+nnoremap <C-a> ^
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+inoremap jk <ESC>
+
+nnoremap <leader>vp :VimuxPromptCommand<CR>
+
+nnoremap <silent> vv <C-w>v
+
+nnoremap <C-p> :Files<CR>
+nnoremap <C-o> :NERDTreeToggle<CR>
+
+" <SPACE>   : forward to next word beginning with alphanumeric char
+" <S-SPACE> : backward to prev word beginning with alphanumeric char
+" <C-SPACE> : same as above (as <S-SPACE> not available in console Vim
+" <BS>      : back to prev word ending with alphanumeric char
+function! <SID>GotoPattern(pattern, dir) range
+    let g:_saved_search_reg = @/
+    let l:flags = "We"
+    if a:dir == "b"
+        let l:flags .= "b"
+    endif
+    for i in range(v:count1)
+        call search(a:pattern, l:flags)
+    endfor
+    let @/ = g:_saved_search_reg
+endfunction
+nnoremap <silent> <SPACE> :<C-U>call <SID>GotoPattern('\(^\\|\<\)[A-Za-z0-9_]', 'f')<CR>
+vnoremap <silent> <SPACE> :<C-U>let g:_saved_search_reg=@/<CR>gv/\(^\\|\<\)[A-Za-z0-9_]<CR>:<C-U>let @/=g:_saved_search_reg<CR>gv
+nnoremap <silent> <S-SPACE> :<C-U>call <SID>GotoPattern('\(^\\|\<\)[A-Za-z0-9_]', 'b')<CR>
+vnoremap <silent> <S-SPACE> :<C-U>let g:_saved_search_reg=@/<CR>gv?\(^\\|\<\)[A-Za-z0-9_]<CR>:<C-U>let @/=g:_saved_search_reg<CR>gv
+nnoremap <silent> <BS> :call <SID>GotoPattern('[A-Za-z0-9_]\(\>\\|$\)', 'b')<CR>
+vnoremap <silent> <BS> :<C-U>let g:_saved_search_reg=@/<CR>gv?[A-Za-z0-9_]\(\>\\|$\)<CR>:<C-U>let @/=g:_saved_search_reg<CR>gv
+
+" Redundant mapping of <C-SPACE> to <S-SPACE> so that
+" above mappings are available in console Vim.
+"noremap <C-@> <C-B>
+"if has("gui_running")
+"    map <silent> <C-Space> <S-SPACE>
+"else
+"    if has("unix")
+"        map <Nul> <S-SPACE>
+"    else
+"        map <C-@> <S-SPACE>
+"    endif
+"endif
+
+
