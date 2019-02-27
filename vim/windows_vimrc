@@ -1,0 +1,90 @@
+
+"" Plugins {{{
+call plug#begin('~/vimfiles/plugged')
+
+Plug 'w0rp/ale'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-surround'
+Plug 'tomtom/tcomment_vim'
+" Plug 'sheerun/vim-polygot'
+" Plug 'airblade/vim-gutter'
+Plug 'scrooloose/nerdtree'
+Plug 'Raimondi/delimitMate'
+" Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'junegunn/vim-easy-align'
+Plug 'easymotion/vim-easymotion'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'terryma/vim-multiple-cursors'
+
+Plug '~/.ycm/'
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+
+Plug 'rakr/vim-one'
+
+call plug#end()
+"" }}}
+
+colorscheme one
+set background=dark
+filetype plugin on
+
+set encoding=utf-8
+
+set number
+set nobackup
+set nowritebackup
+set splitright
+set splitbelow
+set smartindent
+set mouse=a
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set laststatus=2
+set wildmode=full
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+set smartcase
+set hlsearch
+set incsearch
+set lazyredraw
+set showmatch
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+set autoread
+set ignorecase
+set wrapscan
+set guioptions=r
+highlight LineNr guifg=#929292
+
+let mapleader=","
+
+nnoremap <leader>h :noh<enter>
+
+nnoremap ; :
+nnoremap : ;
+
+inoremap jk    <ESC>
+inoremap <C-g> <ESC>
+
+nnoremap <C-a> ^
+nnoremap <C-e> $
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+vnoremap <C-a> ^
+vnoremap <C-e> $
+
+nnoremap <C-p> :Files<CR>
+nnoremap <C-o> :NERDTreeToggle<CR>
+
+let g:airline_theme ='one'
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_confg.py'
+
+" vim:fdm=marker
