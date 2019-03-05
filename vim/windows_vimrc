@@ -1,5 +1,4 @@
-
-"" Plugins {{{
+" Plugins {{{
 call plug#begin('~/vimfiles/plugged')
 
 Plug 'w0rp/ale'
@@ -24,6 +23,20 @@ Plug 'rakr/vim-one'
 
 call plug#end()
 "" }}}
+" Plugin Configurations {{{
+let g:airline_theme ='one'
+
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_confg.py'
+let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_max_num_candidates = 10
+
+let g:ale_sign_column_always = 1
+
+" Disable YCM preview buffer
+set completeopt-=preview
+
+" }}}
+" Editor Configurations {{{
 
 colorscheme one
 set background=dark
@@ -62,13 +75,14 @@ highlight LineNr guifg=#929292
 
 let mapleader=","
 
+" }}}
+" Key Bindings {{{
 nnoremap <leader>h :noh<enter>
 
 nnoremap ; :
 nnoremap : ;
 
-inoremap jk    <ESC>
-inoremap <C-g> <ESC>
+inoremap <silent> jk <ESC>
 
 nnoremap <C-a> ^
 nnoremap <C-e> $
@@ -78,13 +92,13 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+nnoremap <Leader>v :vsplit<CR>
+nnoremap <Leader>vh :vsplit<CR>
+
 vnoremap <C-a> ^
 vnoremap <C-e> $
 
 nnoremap <C-p> :Files<CR>
 nnoremap <C-o> :NERDTreeToggle<CR>
-
-let g:airline_theme ='one'
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_confg.py'
-
+" }}}
 " vim:fdm=marker
