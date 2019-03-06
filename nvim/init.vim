@@ -7,7 +7,6 @@ Plug 'tpope/vim-surround'
 Plug 'tomtom/tcomment_vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Raimondi/delimitMate'
-Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'junegunn/vim-easy-align'
 Plug 'easymotion/vim-easymotion'
@@ -16,10 +15,11 @@ Plug 'terryma/vim-multiple-cursors'
 
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
 endif
-
-" Plug '~/.ycm/'
-" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 Plug 'rakr/vim-one'
 
@@ -28,17 +28,16 @@ call plug#end()
 " Plugin Configurations {{{
 let g:airline_theme ='one'
 
-" let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_confg.py'
-" let g:ycm_min_num_of_chars_for_completion = 1
-" let g:ycm_max_num_candidates = 10
-
 let g:deoplete#enable_at_startup = 1
-
+call deoplete#custom#option({
+    \ 'max_list': 50,
+    \ 'min_pattern_length': 1
+\ })
 
 let g:ale_sign_column_always = 1
 
 " Disable YCM preview buffer
-set completeopt-=preview
+set completeopt=noinsert,menuone,noselect
 
 " }}}
 " Editor Configurations {{{
@@ -70,7 +69,7 @@ set whichwrap+=<,>,h,l
 set smartcase
 set hlsearch
 set incsearch
-" set lazyredraw
+set lazyredraw
 set showmatch
 set noerrorbells
 set novisualbell
@@ -86,17 +85,17 @@ let mapleader=","
 
 " }}}
 " Key Bindings {{{
-
 inoremap <silent> jk <ESC>
 
 " <TAB> Completion
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
-nnoremap <leader>h  :noh<CR>
-nnoremap <leader>te :term<CR>
-nnoremap <leader>w  :w<CR>
-nnoremap <leader>q  :q<CR>
+nnoremap <Leader>h :noh<CR>
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>te :term<CR>
+nnoremap <Leader>vv :vsplit<CR>
+nnoremap <Leader>vh :vsplit<CR>
 
 nnoremap ; :
 nnoremap : ;
@@ -109,14 +108,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-nnoremap <Leader>vv :vsplit<CR>
-nnoremap <Leader>vh :vsplit<CR>
-
 vnoremap <C-a> ^
 vnoremap <C-e> $
 
 nnoremap <C-p> :Files<CR>
 nnoremap <C-o> :NERDTreeToggle<CR>
-
 " }}}
 " vim:fdm=marker
