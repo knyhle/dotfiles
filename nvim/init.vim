@@ -50,6 +50,16 @@ if has("gui_running")
     set guifont=SF\ Mono:h10
 endif
 
+if has('termguicolors')
+    set termguicolors
+endif
+
+if has('nvim')
+    set t_ut=
+    set t_Co=256
+    let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+endif
+
 set encoding=utf-8
 
 set number
@@ -71,8 +81,7 @@ set hlsearch
 set incsearch
 set lazyredraw
 set showmatch
-set noerrorbells
-set novisualbell
+set visualbell
 set t_vb=
 set tm=500
 set autoread
@@ -93,9 +102,15 @@ inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 nnoremap <Leader>h :noh<CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
-nnoremap <Leader>te :term<CR>
 nnoremap <Leader>vv :vsplit<CR>
 nnoremap <Leader>vh :vsplit<CR>
+
+nnoremap <Leader>te :Term<CR>
+
+set shell=bash
+
+command! -nargs=* Term  split  | resize 20 | terminal <args>
+command! -nargs=* VTerm vsplit | resize 20 | terminal <args>
 
 nnoremap ; :
 nnoremap : ;
@@ -113,5 +128,14 @@ vnoremap <C-e> $
 
 nnoremap <C-p> :Files<CR>
 nnoremap <C-o> :NERDTreeToggle<CR>
+
+" Terminal Bindings
+tnoremap <ESC> <C-\><C-n>
+
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
+
 " }}}
 " vim:fdm=marker
