@@ -107,8 +107,6 @@ nnoremap <Leader>vh :vsplit<CR>
 
 nnoremap <Leader>te :Term<CR>
 
-set shell=bash
-
 command! -nargs=* Term  split  | resize 20 | terminal <args>
 command! -nargs=* VTerm vsplit | resize 20 | terminal <args>
 
