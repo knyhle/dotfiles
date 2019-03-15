@@ -1,5 +1,5 @@
 " Plugins {{{
-call plug#begin('~/vimfiles/plugged')
+call plug#begin('~/.vimfiles/plugged')
 
 Plug 'w0rp/ale'
 Plug 'tpope/vim-sleuth'
@@ -12,6 +12,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'easymotion/vim-easymotion'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'christoomey/vim-tmux-navigator'
 
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
