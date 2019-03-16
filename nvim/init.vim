@@ -37,6 +37,9 @@ call deoplete#custom#option({
 
 let g:ale_sign_column_always = 1
 
+let g:delimitMate_jump_expansion = 1
+let g:delimitMate_expand_cr = 1
+
 " Disable YCM preview buffer
 set completeopt=noinsert,menuone,noselect
 
