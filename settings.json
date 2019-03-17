@@ -1,0 +1,36 @@
+{
+    "files.hotExit": "off",
+    "window.restoreWindows": "none",
+    "workbench.startupEditor": "none",
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.colorTheme": "One Dark Pro",
+    "editor.fontFamily": "'SF Mono', Consolas, 'Courier New', monospace",
+    "vim.hlsearch": true,
+    "vim.leader": ",",
+    "vim.insertModeKeyBindings": [
+       { "before": ["j", "k"], "after": ["<ESC>"] }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+       { "before": [";"], "after": [":"] },
+       { "before": [":"], "after": [";"] },
+       { "before": ["C-a"], "after": ["^"] },
+       { "before": ["C-e"], "after": ["$"] },
+       { "before": ["<LEADER>", "q"], "after": [":", "q", "<CR>"] },
+       { "before": ["<LEADER>", "w"], "after": [":", "w", "<CR>"] },
+       { "before": ["<LEADER>", "v"], "commands": ["workbench.action.splitEditor"] },
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+       { "before": ["C-a"], "after": ["^"] },
+       { "before": ["C-e"], "after": ["$"] },
+       { "before": [">"], "commands": ["editor.action.indentLines"] },
+       { "before": ["<"], "commands": ["editor.action.outdentLines"] },
+    ],
+   "vim.statusBarColorControl": true,
+   "workbench.colorCustomizations": {
+      "statusBar.background": "#005f5f",
+      "statusBar.noFolderBackground": "#005f5f",
+      "statusBar.debuggingBackground": "#005f5f"
+   },
+   "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
+   "git.autofetch": true
+}
