@@ -2,18 +2,20 @@
 call plug#begin('~/.vimfiles/plugged')
 
 Plug 'w0rp/ale'
+
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
+
 Plug 'tomtom/tcomment_vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Raimondi/delimitMate'
 Plug 'vim-airline/vim-airline'
-Plug 'junegunn/vim-easy-align'
 Plug 'easymotion/vim-easymotion'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'junegunn/vim-easy-align'
 " Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'easymotion/vim-easymotion'
@@ -98,6 +100,8 @@ command! -bang -nargs=? -complete=dir Files
 " }}}
 " Key Bindings {{{
 
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 map <Leader> <Plug>(easymotion-prefix)
 
 inoremap <silent> jk <ESC>
@@ -105,15 +109,18 @@ inoremap <silent> jk <ESC>
 " <TAB> Completion
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
-nnoremap <Leader>h :noh<CR>
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>q :q<CR>
+nnoremap <Leader>w  :w<CR>
+nnoremap <Leader>q  :q<CR>
+nnoremap <Leader>h  :noh<CR>
 nnoremap <Leader>vv :vsplit<CR>
 nnoremap <Leader>vh :vsplit<CR>
 
-nnoremap <Leader>bb  :Buffers<CR>
-nnoremap <Leader>ll  :Lines<CR>
-nnoremap <Leader>lb  :BLines<CR>
+" FZF Mappings
+nnoremap <C-p>      :Files<CR>
+nnoremap <C-t>      :FZF ~<CR>
+nnoremap <Leader>bb :Buffers<CR>
+nnoremap <Leader>ll :Lines<CR>
+nnoremap <Leader>bl :BLines<CR>
 
 nnoremap <Leader>te :Term<CR>
 
@@ -134,8 +141,6 @@ nnoremap <C-l> <C-w>l
 vnoremap <C-a> ^
 vnoremap <C-e> $
 
-nnoremap <C-p> :Files<CR>
-nnoremap <C-t> :FZF ~<CR>
 nnoremap <C-o> :NERDTreeToggle<CR>
 
 " Terminal Bindings
@@ -196,7 +201,12 @@ set autoread
 set ignorecase
 set wrapscan
 set guioptions=r
+
 highlight LineNr guifg=#929292
+
+" Set cursor
+set guicursor=n-v-c:block-Cursor
+set guicursor+=i:hor20
 
 let mapleader=","
 
