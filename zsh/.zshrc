@@ -104,18 +104,20 @@ export EDITOR='nvim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias tm="tmux"
-alias tma="tmux attach"
-alias tml="tmux ls"
-alias tmk="tmux kill-server"
+alias  tm='tmux'
+alias tma='tmux attach'
+alias tml='tmux ls'
+alias tmk='tmux kill-server'
 
-alias nv="nvim"
+alias nv='nvim'
+
+alias define='BROWSER=w3m ddgr \!wordnik '
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export FZF_DEFAULT_OPTS="--ansi"
 # export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --color=always --exclude .git'
 # export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --color=always --exclude .git'
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
+# export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden --color=always --exclude .git'
+export FZF_DEFAULT_COMMAND="rg --files --no-ignore-vcs --hidden --vimgrep -g '!.git/*' -g '!node_modules/*'"
+export FZF_CTRL_T_COMMAND="rg --files --no-ignore-vcs --hidden --vimgrep -g '!*/.git/*' -g '!*/node_modules/*' $HOME"
