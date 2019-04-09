@@ -1,18 +1,28 @@
+" Bootstrap {{{
+
+" https://stackoverflow.com/a/11917772
+let mapleader=","
+
+" }}}
 " Plugins {{{
 call plug#begin('~/.vimfiles/plugged')
 
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
+Plug 'zefei/vim-wintabs'
 
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
-
+" Plug 'tpope/vim-fugitive'
+Plug 'sheerun/vim-polyglot'
+Plug 'majutsushi/tagbar'
+Plug 'leafgarland/typescript-vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Raimondi/delimitMate'
 Plug 'vim-airline/vim-airline'
 Plug 'easymotion/vim-easymotion'
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/vim-easy-align'
@@ -20,14 +30,19 @@ Plug 'junegunn/vim-easy-align'
 Plug 'airblade/vim-rooter'
 Plug 'easymotion/vim-easymotion'
 
-if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-endif
+Plug 'kaicataldo/material.vim'
+Plug 'drewtempelmeyer/palenight.vim'
 
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }}
+
+" if has('nvim')
+"     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" else
+"     Plug 'Shougo/deoplete.nvim'
+"     Plug 'roxma/nvim-yarp'
+"     Plug 'roxma/vim-hug-neovim-rpc'
+" endif
+"
 Plug 'rakr/vim-one'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -37,20 +52,53 @@ call plug#end()
 """ }}}
 " Plugin Configurations {{{
 let g:airline_theme ='one'
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option({
-    \ 'max_list': 50,
-    \ 'min_pattern_length': 1
-\ })
+" let g:deoplete#enable_at_startup = 1
+" call deoplete#custom#option({
+"     \ 'max_list': 50,
+"     \ 'min_pattern_length': 1
+" \ })
+"
+" let g:ale_sign_column_always = 1
 
-let g:ale_sign_column_always = 1
+let g:tagbar_type_typescript = {
+  \ 'ctagstype': 'typescript',
+  \ 'kinds': [
+    \ 'c:classes:0:1',
+    \ 'n:modules:0:1',
+    \ 'f:functions:0:1',
+    \ 'v:variables:0:1',
+    \ 'v:varlambdas:0:1',
+    \ 'm:members:0:1',
+    \ 'i:interfaces:0:1',
+    \ 'e:enums:0:1',
+  \ ],
+  \ 'sort' : 0
+\ }
 
 let g:delimitMate_jump_expansion = 1
 let g:delimitMate_expand_cr = 1
 
 let g:fzf_buffers_jump = 1
 
+" let g:tagbar_type_typescript = {
+"   \ 'ctagstype': 'typescript',
+"   \ 'kinds': [
+"     \ 'c:classes',
+"     \ 'n:modules',
+"     \ 'f:functions',
+"     \ 'v:variables',
+"     \ 'v:varlambdas',
+"     \ 'm:members',
+"     \ 'i:interfaces',
+"     \ 'e:enums',
+"   \ ]
+" \ }
+"
+" let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
+"
 " FZF Configs from https://github.com/junegunn/fzf.vim {{{
 " Command for git grep
 " - fzf#vim#grep(command, with_column, [options], [fullscreen])
@@ -88,12 +136,12 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
-" Likewise, Files command with preview window
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+" " Likewise, Files command with preview window
+" command! -bang -nargs=? -complete=dir Files
+"   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+" "
+" " }}}
 "
-" }}}
-
 " Disable YCM preview buffer
 " set completeopt=noinsert,menuone,noselect
 
@@ -102,9 +150,42 @@ command! -bang -nargs=? -complete=dir Files
 
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
-map <Leader> <Plug>(easymotion-prefix)
+
+nmap <Leader>bn <Plug>(wintabs_next)
+nmap <Leader>bp <Plug>(wintabs_previous)
+nmap <Leader>bc <Plug>(wintabs_close)
+
+" map <Leader> <Plug>(easymotion-prefix)
+nmap <SPACE> <Plug>(easymotion-s)
 
 inoremap <silent> jk <ESC>
+inoremap <C-g> <ESC>
+
+" Use <c-space> for trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+" autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
 
 " <TAB> Completion
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -117,12 +198,14 @@ nnoremap <Leader>vh :vsplit<CR>
 
 " FZF Mappings
 nnoremap <C-p>      :Files<CR>
-nnoremap <C-t>      :FZF ~<CR>
-nnoremap <Leader>bb :Buffers<CR>
+nnoremap <C-i>      :TagbarOpen fj<CR>
+" nnoremap <C-t>      :FZF ~<CR>
+nnoremap <C-f> <Plug>(wintabs_next)
 nnoremap <Leader>ll :Lines<CR>
 nnoremap <Leader>bl :BLines<CR>
+nnoremap <Leader>bp <C-^>
 
-nnoremap <Leader>te :Term<CR>
+nnoremap <Leader>et :edit $MYVIMRC<CR>
 
 command! -nargs=* Term  split  | resize 20 | terminal <args>
 command! -nargs=* VTerm vsplit | resize 20 | terminal <args>
@@ -145,6 +228,7 @@ nnoremap <C-o> :NERDTreeToggle<CR>
 
 " Terminal Bindings
 if has('nvim')
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
     tnoremap <ESC> <C-\><C-n>
 
     tnoremap <C-h> <C-\><C-n><C-w>h
@@ -157,10 +241,12 @@ endif
 
 colorscheme one
 set background=dark
+" let g:material_theme_style = 'palenight'
+
 filetype plugin on
 
-if has("gui_running")
-    set guifont=SF\ Mono:h10
+if has('gui_running')
+    set guifont=SF\ Mono:h14
 endif
 
 if has('termguicolors')
@@ -174,10 +260,18 @@ if has('nvim')
 endif
 
 set encoding=utf-8
+" Smaller updatetime for CursorHold & CursorHoldI
+" set updatetime=300
 
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
 set number
 set nobackup
 set nowritebackup
+set noswapfile
 set splitright
 set splitbelow
 set smartindent
@@ -190,10 +284,10 @@ set wildmode=full
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 set smartcase
-set hlsearch
+set nohlsearch
 set incsearch
 set lazyredraw
-set showmatch
+" set showmatch
 set visualbell
 set t_vb=
 set tm=500
@@ -208,7 +302,8 @@ highlight LineNr guifg=#929292
 set guicursor=n-v-c:block-Cursor
 set guicursor+=i:hor20
 
-let mapleader=","
+" set tags=./tags;,tags;
+
 
 " }}}
 " vim:fdm=marker
