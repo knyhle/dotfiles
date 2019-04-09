@@ -26,12 +26,15 @@ Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/vim-easy-align'
+Plug 'vim-syntastic/syntastic'
 " Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'easymotion/vim-easymotion'
 
 Plug 'kaicataldo/material.vim'
 Plug 'drewtempelmeyer/palenight.vim'
+
+Plug 'rust-lang/rust.vim'
 
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }}
 
@@ -55,25 +58,26 @@ let g:airline_theme ='one'
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
 let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
-" let g:deoplete#enable_at_startup = 1
-" call deoplete#custom#option({
-"     \ 'max_list': 50,
-"     \ 'min_pattern_length': 1
-" \ })
-"
-" let g:ale_sign_column_always = 1
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 let g:tagbar_type_typescript = {
   \ 'ctagstype': 'typescript',
   \ 'kinds': [
-    \ 'c:classes:0:1',
-    \ 'n:modules:0:1',
-    \ 'f:functions:0:1',
-    \ 'v:variables:0:1',
-    \ 'v:varlambdas:0:1',
-    \ 'm:members:0:1',
-    \ 'i:interfaces:0:1',
-    \ 'e:enums:0:1',
+    \ 'c:classes',
+    \ 'n:modules',
+    \ 'f:functions',
+    \ 'v:variables',
+    \ 'v:varlambdas',
+    \ 'm:members',
+    \ 'i:interfaces',
+    \ 'e:enums',
   \ ],
   \ 'sort' : 0
 \ }
@@ -83,22 +87,6 @@ let g:delimitMate_expand_cr = 1
 
 let g:fzf_buffers_jump = 1
 
-" let g:tagbar_type_typescript = {
-"   \ 'ctagstype': 'typescript',
-"   \ 'kinds': [
-"     \ 'c:classes',
-"     \ 'n:modules',
-"     \ 'f:functions',
-"     \ 'v:variables',
-"     \ 'v:varlambdas',
-"     \ 'm:members',
-"     \ 'i:interfaces',
-"     \ 'e:enums',
-"   \ ]
-" \ }
-"
-" let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
-"
 " FZF Configs from https://github.com/junegunn/fzf.vim {{{
 " Command for git grep
 " - fzf#vim#grep(command, with_column, [options], [fullscreen])
@@ -141,9 +129,7 @@ command! -bang -nargs=* Rg
 "   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 " "
 " " }}}
-"
-" Disable YCM preview buffer
-" set completeopt=noinsert,menuone,noselect
+
 
 " }}}
 " Key Bindings {{{
