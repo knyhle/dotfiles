@@ -306,6 +306,10 @@ set shortmess+=c
 
 " always show signcolumns
 set signcolumn=yes
+
+" Trim trailing whitespace for only certain filetypes
+autocmd FileType c,cpp,java,php,ts,js,md autocmd BufWritePre <buffer> %s/\s\+$//e
+
 set number
 set virtualedit=all
 set nobackup
