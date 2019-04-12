@@ -119,5 +119,5 @@ export FZF_DEFAULT_OPTS="--ansi"
 # export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --color=always --exclude .git'
 # export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --color=always --exclude .git'
 # export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden --color=always --exclude .git'
-export FZF_DEFAULT_COMMAND="rg --files --no-ignore-vcs --hidden --vimgrep -g '!.git/*' -g '!node_modules/*'"
+export FZF_DEFAULT_COMMAND="rg --files --no-ignore-vcs --hidden --vimgrep -g '!.git/*' -g '!node_modules/*' -g '!*.o'"
 export FZF_CTRL_T_COMMAND="rg --files --no-ignore-vcs --hidden --vimgrep -g '!*/.git/*' -g '!*/node_modules/*' $HOME"

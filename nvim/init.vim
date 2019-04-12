@@ -1,9 +1,11 @@
+
 " Bootstrap {{{
 
 " https://stackoverflow.com/a/11917772
 let mapleader=","
 
 " }}}
+
 " Plugins {{{
 call plug#begin('~/.vimfiles/plugged')
 
@@ -53,6 +55,7 @@ Plug 'junegunn/fzf.vim'
 
 call plug#end()
 """ }}}
+
 " Plugin Configurations {{{
 let g:airline_theme ='one'
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
@@ -67,6 +70,13 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+let g:tagbar_sort = 0
+let g:tagbar_compact = 1
+let g:tagbar_autofocus = 1
+
+" TagBar Languages {{{
+
+" Typescript {{{
 let g:tagbar_type_typescript = {
   \ 'ctagstype': 'typescript',
   \ 'kinds': [
@@ -81,6 +91,46 @@ let g:tagbar_type_typescript = {
   \ ],
   \ 'sort' : 0
 \ }
+" }}}
+" Objective-C {{{
+" add a definition for Objective-C to tagbar
+let g:tagbar_type_objc = {
+    \ 'ctagstype' : 'ObjectiveC',
+    \ 'kinds'     : [
+        \ 'i:interface',
+        \ 'I:implementation',
+        \ 'p:Protocol',
+        \ 'm:Object_method',
+        \ 'c:Class_method',
+        \ 'v:Global_variable',
+        \ 'F:Object field',
+        \ 'f:function',
+        \ 'p:property',
+        \ 't:type_alias',
+        \ 's:type_structure',
+        \ 'e:enumeration',
+        \ 'M:preprocessor_macro',
+    \ ],
+    \ 'sro'        : ' ',
+    \ 'kind2scope' : {
+        \ 'i' : 'interface',
+        \ 'I' : 'implementation',
+        \ 'p' : 'Protocol',
+        \ 's' : 'type_structure',
+        \ 'e' : 'enumeration'
+    \ },
+    \ 'scope2kind' : {
+        \ 'interface'      : 'i',
+        \ 'implementation' : 'I',
+        \ 'Protocol'       : 'p',
+        \ 'type_structure' : 's',
+        \ 'enumeration'    : 'e'
+    \ }
+\ }
+
+" }}}
+
+" }}}
 
 let g:delimitMate_jump_expansion = 1
 let g:delimitMate_expand_cr = 1
@@ -128,10 +178,11 @@ command! -bang -nargs=* Rg
 " command! -bang -nargs=? -complete=dir Files
 "   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 " "
-" " }}}
 
 
 " }}}
+" }}}
+
 " Key Bindings {{{
 
 xmap ga <Plug>(EasyAlign)
@@ -223,6 +274,7 @@ if has('nvim')
     tnoremap <C-l> <C-\><C-n><C-w>l
 endif
 " }}}
+
 " Editor Configurations {{{
 
 colorscheme one
@@ -255,6 +307,7 @@ set shortmess+=c
 " always show signcolumns
 set signcolumn=yes
 set number
+set virtualedit=all
 set nobackup
 set nowritebackup
 set noswapfile
@@ -262,8 +315,8 @@ set splitright
 set splitbelow
 set smartindent
 set mouse=a
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 set laststatus=2
 set wildmode=full
@@ -285,11 +338,8 @@ set guioptions=r
 highlight LineNr guifg=#929292
 
 " Set cursor
-set guicursor=n-v-c:block-Cursor
-set guicursor+=i:hor20
-
-" set tags=./tags;,tags;
-
+set guicursor=n-v-c:block-Cursor/lCursor,i-ci-ve:hor50
 
 " }}}
+
 " vim:fdm=marker
