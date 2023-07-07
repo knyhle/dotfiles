@@ -1,0 +1,3 @@
+[submodule "/home/kennyle/.config/nvim"]
+	path = /home/kennyle/.config/nvim
+	url = https://github.com/knyhle/kickstart.nvim
