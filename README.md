@@ -18,7 +18,13 @@ config update-index --skip-worktree README.md
 Alias
 ```bash
 echo 'alias config="/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME"' >> ~/.bash_aliases
+
+# Make sure this exists in rc file
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
 ```
+
 
 Remove
 ```bash
