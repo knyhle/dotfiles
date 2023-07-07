@@ -15,6 +15,11 @@ config submodule update --init --recursive
 config update-index --skip-worktree README.md
 ```
 
+Alias
+```bash
+echo 'alias config="/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME"' >> ~/.bash_aliases
+```
+
 Remove
 ```bash
 rm -rf ~/.git
