@@ -85,7 +85,7 @@ source $ZSH/oh-my-zsh.sh
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-#   export EDITOR='mvim'
+export EDITOR='nvim'
 # fi
 
 # Compilation flags
@@ -108,3 +108,5 @@ fi
 export GEM_HOME="$HOME/.gems"
 export PATH="$HOME/.gems/bin:$PATH"
 alias lg='lazygit'
+
+# eval $(ssh-agent -s)
