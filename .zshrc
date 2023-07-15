@@ -104,9 +104,14 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+alias lg='lazygit'
+
 # Intall Ruby Gems to ~/gems
 export GEM_HOME="$HOME/.gems"
 export PATH="$HOME/.gems/bin:$PATH"
-alias lg='lazygit'
+export PATH=$PATH:/usr/local/go/bin
 
-# eval $(ssh-agent -s)
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
