@@ -1,6 +1,6 @@
 [submodule ".config/nvim"]
 	path = .config/nvim
-	url = https://github.com/knyhle/kickstart.nvim
+	url = https://github.com/knyhle/nvim.git
 	branch = main
 [submodule ".tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
