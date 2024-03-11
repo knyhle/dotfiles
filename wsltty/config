@@ -1,0 +1,9 @@
+# To use common configuration in %APPDATA%\mintty, simply remove this file
+CtrlShiftShortcuts=yes
+Columns=123
+Rows=28
+BellType=0
+Font=FiraCode Nerd Font Mono
+FontHeight=12
+CursorType=block
+WindowTitle=
