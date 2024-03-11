@@ -7,3 +7,4 @@ Font=FiraCode Nerd Font Mono
 FontHeight=12
 CursorType=block
 WindowTitle=
+ThemeFile=catpuccin-macchiato.mintty
