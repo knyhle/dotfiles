@@ -102,11 +102,6 @@ export EDITOR='nvim'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# .zshrc
-fpath+=($HOME/.zsh/pure)
-autoload -U promptinit; promptinit
-prompt pure
-
 # Created by `pipx` on 2024-04-22 11:13:38
 export PATH="$PATH:/home/kenny/.local/bin"
 export PATH="$PATH:/usr/local/go/bin"
