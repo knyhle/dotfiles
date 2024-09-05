@@ -17,7 +17,7 @@ if ! grep -q 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' "$HOME/.zs
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-brew install fzf zoxide ripgrep fd starship gh tmux node lazygit
+brew install fzf zoxide ripgrep fd starship gh tmux node lazygit git-branchless
 
 current_path=$(dirname $(realpath "$0"))
 [ ! -L "$HOME/.tmux.conf" ] && ln -s $current_path/.tmux.conf ~/.tmux.conf
@@ -36,3 +36,6 @@ if ! grep -q 'export PATH=$PATH:/usr/local/go/bin' "$HOME/.profile"; then
   echo 'export PATH=$PATH:/usr/local/go/bin' >>"$HOME/.profile"
   source "$HOME/.profile"
 fi
+
+pipx install poetry
+pipx install --include-deps ansible
