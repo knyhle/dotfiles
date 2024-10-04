@@ -2,6 +2,7 @@
 
 set -e
 
+sudo apt update
 sudo apt install zsh build-essential unzip pipx python3-pip -y
 
 if ! command -v brew &>/dev/null; then
