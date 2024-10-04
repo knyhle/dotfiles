@@ -19,9 +19,9 @@ fi
 
 brew install fzf zoxide ripgrep fd starship gh tmux node lazygit git-branchless go zig
 
-current_path=$(dirname $(realpath "$0"))
 [ ! -L "$HOME/.tmux.conf" ] && curl -fsSL https://raw.githubusercontent.com/knyhle/dotfiles/refs/heads/main/.tmux.conf -o $HOME/.tmux.conf
 [ ! -L "$HOME/.zshrc" ] && ln -s curl -fsSL https://raw.githubusercontent.com/knyhle/dotfiles/refs/heads/main/.zshrc -o $HOME/.zshrc
+
 [ ! -d "$HOME/.tmux/plugins/tpm" ] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ~/.tmux/plugins/tpm/bin/install_plugins
 
