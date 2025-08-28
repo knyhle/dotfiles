@@ -25,3 +25,27 @@ export FZF_DEFAULT_OPTS=" \
 --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
 --color=selected-bg:#45475a \
 --multi"
+
+export COMPOSE_BAKE=true
+export PATH=$HOME/bin:$PATH
+
+alias k="kubectl"
+alias cd="z"
+alias lg="lazygit"
+alias d="docker"
+alias dc="docker compose"
+
+eval "$(direnv hook bash)"
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+export PATH=/usr/local/go/bin:$HOME/go/bin:$PATH
+
+autoload -U compinit
+compinit
+source <(jj util completion zsh)
+
+jjsync() {
+    jj git fetch
+    # jj rebase -s 'all:roots(trunk()..@)' -d 'trunk()' --skip-emptied
+    jj rebase -s 'all:roots(mutable())' -d 'trunk()' --skip-emptied
+    # jj bookmark list -r main -T 'name ++ "\n"' | grep -v "^main$" | xargs jj bookmark delete
+}
